@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.YoshiKodiWizard" name="The Yoshi Family Build Wizard" version="1.1.4" provider-name="Y05h1mura">
+<addon id="plugin.program.YoshiKodiWizard" name="The Yoshi Family Build Wizard" version="1.1.5" provider-name="Y05h1mura">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>

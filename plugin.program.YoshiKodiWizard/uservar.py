@@ -88,13 +88,13 @@ WIZARDFILE     = 'http://yoshimura.eu5.org/Yoshi/Wizard/texts/autobuilds.txt'
 ### AUTO INSTALL ########################################
 ########## REPO IF NOT INSTALLED ########################
 # Enable Auto Install 'Yes' or 'No'
-AUTOINSTALL    = 'No'
+AUTOINSTALL    = 'Yes'
 # Addon ID for the repository
-REPOID         = ''
+REPOID         = 'repository.yoshi'
 # Url to Addons.xml file in your repo folder(this is so we can get the latest version)
-REPOADDONXML   = ''
+REPOADDONXML   = 'http://github.com/Y05h1mura/repository.yoshi/blob/master/zips/addons.xml'
 # Url to folder zip is located in
-REPOZIPURL     = ''
+REPOZIPURL     = 'http://github.com/Y05h1mura/repository.yoshi/tree/master/zips'
 #########################################################
 
 #########################################################
