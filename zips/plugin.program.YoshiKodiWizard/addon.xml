@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.YoshiKodiWizard" name="The Yoshi Family Build Wizard" version="1.1.4" provider-name="Y05h1mura">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="startup.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">The Yoshi Family Build Wizard</summary>
+    <description lang="en">Welcome to my Wizard, home of the Yoshi Family Build, The Build will be updated regularly and now my Wizard will be able to check for updates automatically for you.</description>
+    <platform>all</platform>
+  </extension>
+</addon>

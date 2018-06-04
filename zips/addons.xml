@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="plugin.program.YoshiKodiWizard" name="The Yoshi Family Build Wizard" version="1.1.4" provider-name="Y05h1mura">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="startup.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">The Yoshi Family Build Wizard</summary>
+    <description lang="en">Welcome to my Wizard, home of the Yoshi Family Build, The Build will be updated regularly and now my Wizard will be able to check for updates automatically for you.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.yoshi" name="Yoshi's Place" version="1.1" provider-name="Yoshimura">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0" />
+        <import addon="script.module.nanscrapers" version="0.5.5" />
+        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
+        <import addon="script.module.beautifulsoup" version="3.2.1" />
+        <import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.module.addon.common" version="2.0.0" />
+        <import addon="script.module.xmltodict" version="0.9.0" />
+        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
+        <import addon="script.module.urlresolver" version="1.2.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Yoshi's Place, My first addon.</summary>
+        <description lang="en">Search and Stream various Videos freely available across the internet</description>
+        <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+
+        <platform>all</platform>
+        <website></website>
+        <video_guide></video_guide>
+    </extension>
+</addon>
+
+<addon id="repository.yoshi" name="yoshi" version="0.0.1" provider-name="Yoshimura">
+	<extension point="xbmc.addon.repository" name="yoshi">
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+		<info compressed="false">https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Repository for Yoshi's Wizard and Addons</summary>
+		<description lang="en">Home of the Yoshi Wizard and Yoshi's Place Addon</description>
+		<genre>tech,wizard,uk</genre>
+	</extension>
+</addon>
+</addons>

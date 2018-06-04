@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.yoshi" name="yoshi" version="0.0.1" provider-name="Yoshimura">
+	<extension point="xbmc.addon.repository" name="yoshi">
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+		<info compressed="false">https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Repository for Yoshi's Wizard and Addons</summary>
+		<description lang="en">Home of the Yoshi Wizard and Yoshi's Place Addon</description>
+		<genre>tech,wizard,uk</genre>
+	</extension>
+</addon>
