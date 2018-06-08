@@ -92,9 +92,9 @@ AUTOINSTALL    = 'Yes'
 # Addon ID for the repository
 REPOID         = 'repository.yoshi'
 # Url to Addons.xml file in your repo folder(this is so we can get the latest version)
-REPOADDONXML   = 'http://github.com/Y05h1mura/repository.yoshi/blob/master/zips/addons.xml'
+REPOADDONXML   = 'https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/addons.xml'
 # Url to folder zip is located in
-REPOZIPURL     = 'http://github.com/Y05h1mura/repository.yoshi/tree/master/zips'
+REPOZIPURL     = 'https://raw.githubusercontent.com/Y05h1mura/repository.yoshi/master/zips/repository.yoshi/'
 #########################################################
 
 #########################################################
