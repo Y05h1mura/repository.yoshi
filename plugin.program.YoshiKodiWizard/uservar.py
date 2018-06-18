@@ -4,7 +4,7 @@ import os, xbmc, xbmcaddon
 ### User Edit Variables #################################
 #########################################################
 ADDON_ID       = xbmcaddon.Addon().getAddonInfo('id')
-ADDONTITLE     = 'The Yoshi Family Build Wizard'
+ADDONTITLE     = 'The Yoshi Wizard'
 EXCLUDES       = [ADDON_ID, 'plugin.program.YoshiKodiWizard']
 # Text File with build info in it.
 BUILDFILE      = 'http://yoshimura.eu5.org/Yoshi/Wizard/texts/autobuilds.txt'
@@ -79,9 +79,9 @@ CONTACTFANART  = 'http://'
 ### AUTO UPDATE #########################################
 ########## FOR THOSE WITH NO REPO #######################
 # Enable Auto Update 'Yes' or 'No'
-AUTOUPDATE     = 'Yes'
+AUTOUPDATE     = 'No'
 # Url to wizard version
-WIZARDFILE     = 'http://yoshimura.eu5.org/Yoshi/Wizard/texts/autobuilds.txt'
+WIZARDFILE     = 'http://'
 #########################################################
 
 #########################################################

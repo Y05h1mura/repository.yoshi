@@ -1,3 +1,5 @@
+v1.1.7 Removed the old way of updating the Wizard from the code and changed the addon name to The Yoshi Wizard
+
 v1.1.6 added auto install of Yoshi's Repo 
 
 v1.1.4
