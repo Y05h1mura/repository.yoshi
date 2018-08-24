@@ -206,37 +206,35 @@ def index():
 
 def buildMenu():
 	WORKINGURL = wiz.workingURL(BUILDFILE)
-	addFile('%s Version: %s' % (MCNAME, KODIV), '', icon=ICONBUILDS, themeit=THEME3)
-	addDir ('Save Data Menu'       ,'savedata', icon=ICONSAVE,     themeit=THEME3)
-	if HIDESPACERS == 'No': addFile(wiz.sep(), '', themeit=THEME3)
 	if not WORKINGURL == True:
+		addFile('%s Version: %s' % (MCNAME, KODIV), '', icon=ICONBUILDS, themeit=THEME3)
+		addDir ('Save Data Menu'       ,'savedata', icon=ICONSAVE,     themeit=THEME3)
+		if HIDESPACERS == 'No': addFile(wiz.sep(), '', themeit=THEME3)
 		addFile('Url for txt file not valid', '', icon=ICONBUILDS, themeit=THEME3)
 		addFile('%s' % WORKINGURL, '', icon=ICONBUILDS, themeit=THEME3)
 	else:
-		third = False
+		total, count15, count16, count17, count18, adultcount, hidden = wiz.buildCount()
+		third = False; addin = []
 		if THIRDPARTY == 'true':
-			if not THIRD1NAME == '' and not THIRD1URL == '':
-				#state, count = wiz.thirdParty(THIRD1URL)
-				addDir ("[B]%s[/B]" % (THIRD1NAME), 'viewthirdparty', '1', icon=ICONBUILDS, themeit=THEME3)
-				third = True
-			if not THIRD2NAME == '' and not THIRD2URL == '':
-				#state, count = wiz.thirdParty(THIRD2URL)
-				addDir ("[B]%s[/B]" % (THIRD2NAME), 'viewthirdparty', '2', icon=ICONBUILDS, themeit=THEME3)
-				third = True
-			if not THIRD3NAME == '' and not THIRD3URL == '':
-				#state, count = wiz.thirdParty(THIRD3URL)
-				#addDir ("[B]%s(%s)[/B]" % (THIRD3NAME, len(count)), 'viewthirdparty', '3', icon=ICONBUILDS, themeit=THEME3)
-				addDir ("[B]%s[/B]" % (THIRD3NAME), 'viewthirdparty', '3', icon=ICONBUILDS, themeit=THEME3)
-				third = True
+			if not THIRD1NAME == '' and not THIRD1URL == '': third = True; addin.append('1')
+			if not THIRD2NAME == '' and not THIRD2URL == '': third = True; addin.append('2')
+			if not THIRD3NAME == '' and not THIRD3URL == '': third = True; addin.append('3')
 		link  = wiz.openURL(BUILDFILE).replace('\n','').replace('\r','').replace('\t','').replace('gui=""', 'gui="http://"').replace('theme=""', 'theme="http://"').replace('adult=""', 'adult="no"')
 		match = re.compile('name="(.+?)".+?ersion="(.+?)".+?rl="(.+?)".+?ui="(.+?)".+?odi="(.+?)".+?heme="(.+?)".+?con="(.+?)".+?anart="(.+?)".+?dult="(.+?)".+?escription="(.+?)"').findall(link)
-		total, count15, count16, count17, count18 = wiz.buildCount()
 		if total == 1 and third == False:
 			for name, version, url, gui, kodi, theme, icon, fanart, adult, description in match:
 				if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
 				if not DEVELOPER == 'true' and wiz.strTest(name): continue
-				else: viewBuild(match[0][0]); return
-		elif len(match) > 1:
+				viewBuild(match[0][0])
+				return
+		addFile('%s Version: %s' % (MCNAME, KODIV), '', icon=ICONBUILDS, themeit=THEME3)
+		addDir ('Save Data Menu'       ,'savedata', icon=ICONSAVE,     themeit=THEME3)
+		if HIDESPACERS == 'No': addFile(wiz.sep(), '', themeit=THEME3)
+		if third == True:
+			for item in addin:
+				name = eval('THIRD%sNAME' % item)
+				addDir ("[B]%s[/B]" % name, 'viewthirdparty', item, icon=ICONBUILDS, themeit=THEME3)
+		if len(match) >= 1:
 			if SEPERATE == 'true':
 				for name, version, url, gui, kodi, theme, icon, fanart, adult, description in match:
 					if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
@@ -244,7 +242,6 @@ def buildMenu():
 					menu = createMenu('install', '', name)
 					addDir('[%s] %s (v%s)' % (float(kodi), name, version), 'viewbuild', name, description=description, fanart=fanart,icon=icon, menu=menu, themeit=THEME2)
 			else:
-				
 				if count18 > 0:
 					state = '+' if SHOW18 == 'false' else '-'
 					addFile('[B]%s Leia Builds(%s)[/B]' % (state, count18), 'togglesetting',  'show17', themeit=THEME3)
@@ -289,6 +286,12 @@ def buildMenu():
 							if kodiv <= 15:
 								menu = createMenu('install', '', name)
 								addDir('[%s] %s (v%s)' % (float(kodi), name, version), 'viewbuild', name, description=description, fanart=fanart,icon=icon, menu=menu, themeit=THEME2)
+		elif hidden > 0: 
+			if adultcount > 0:
+				addFile('There is currently only Adult builds', '', icon=ICONBUILDS, themeit=THEME3)
+				addFile('Enable Show Adults in Addon Settings > Misc', '', icon=ICONBUILDS, themeit=THEME3)
+			else:
+				addFile('Currently No Builds Offered from %s' % ADDONTITLE, '', icon=ICONBUILDS, themeit=THEME3)
 		else: addFile('Text file for builds not formated correctly.', '', icon=ICONBUILDS, themeit=THEME3)
 	setView('files', 'viewType')
 
@@ -796,9 +799,9 @@ def maintMenu(view=None):
 		first = THIRD1NAME if not THIRD1NAME == '' else 'Not Set'
 		secon = THIRD2NAME if not THIRD2NAME == '' else 'Not Set'
 		third = THIRD3NAME if not THIRD3NAME == '' else 'Not Set'
-		addFile('Edit Third Party Wizard 1: %s' % first, 'editthird', '1', icon=ICONMAINT, themeit=THEME3)
-		addFile('Edit Third Party Wizard 2: %s' % secon, 'editthird', '2', icon=ICONMAINT, themeit=THEME3)
-		addFile('Edit Third Party Wizard 3: %s' % third, 'editthird', '3', icon=ICONMAINT, themeit=THEME3)
+		addFile('Edit Third Party Wizard 1: [COLOR %s]%s[/COLOR]' % (COLOR2, first), 'editthird', '1', icon=ICONMAINT, themeit=THEME3)
+		addFile('Edit Third Party Wizard 2: [COLOR %s]%s[/COLOR]' % (COLOR2, secon), 'editthird', '2', icon=ICONMAINT, themeit=THEME3)
+		addFile('Edit Third Party Wizard 3: [COLOR %s]%s[/COLOR]' % (COLOR2, third), 'editthird', '3', icon=ICONMAINT, themeit=THEME3)
 	addFile('Auto Clean', '', fanart=FANART, icon=ICONMAINT, themeit=THEME1)
 	addFile('Auto Clean Up On Startup: %s' % autoclean.replace('true',on).replace('false',off) ,'togglesetting', 'autoclean',   icon=ICONMAINT, themeit=THEME3)
 	if autoclean == 'true':
@@ -1271,6 +1274,7 @@ def developer():
 	addFile('Test Update',                         'testupdate',            themeit=THEME1)
 	addFile('Test First Run',                      'testfirst',             themeit=THEME1)
 	addFile('Test First Run Settings',             'testfirstrun',          themeit=THEME1)
+	addFile('Test APk',             'testapk',          themeit=THEME1)
 	
 	setView('files', 'viewType')
 
@@ -2151,13 +2155,12 @@ def testnotify():
 	url = wiz.workingURL(NOTIFICATION)
 	if url == True:
 		try:
-			link  = wiz.openURL(NOTIFICATION).replace('\r','').replace('\t','')
-			id, msg = link.split('|||')
-			if msg.startswith('\n'): msg = msg[1:]
+			id, msg = wiz.splitNotify(NOTIFICATION)
+			if id == False: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), "[COLOR %s]Notification: Not Formated Correctly[/COLOR]" % COLOR2); return
 			notify.notification(msg, True)
 		except Exception, e:
 			wiz.log("Error on Notifications Window: %s" % str(e), xbmc.LOGERROR)
-	else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" (COLOR1, ADDONTITLE), "[COLOR %s]Invalid URL for Notification[/COLOR]" % COLOR2)
+	else: wiz.LogNotify("[COLOR %s]%s[/COLOR]" % (COLOR1, ADDONTITLE), "[COLOR %s]Invalid URL for Notification[/COLOR]" % COLOR2)
 
 def testupdate():
 	if BUILDNAME == "":
@@ -2362,5 +2365,6 @@ elif mode=='testnotify'     : testnotify()
 elif mode=='testupdate'     : testupdate()
 elif mode=='testfirst'      : testfirst()
 elif mode=='testfirstrun'   : testfirstRun()
+elif mode=='testapk'        : notify.apkInstaller('SPMC')
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

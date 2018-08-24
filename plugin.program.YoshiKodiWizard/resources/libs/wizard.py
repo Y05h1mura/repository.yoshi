@@ -320,18 +320,18 @@ def checkWizard(ret):
 def buildCount(ver=None):
 	link  = openURL(BUILDFILE).replace('\n','').replace('\r','').replace('\t','')
 	match = re.compile('name="(.+?)".+?odi="(.+?)".+?dult="(.+?)"').findall(link)
-	total = 0; count15 = 0; count16 = 0; count17 = 0; count18 = 0;
+	total = 0; count15 = 0; count16 = 0; count17 = 0; count18 = 0; hidden = 0; adultcount = 0
 	if len(match) > 0:
 		for name, kodi, adult in match:
-			if not SHOWADULT == 'true' and adult.lower() == 'yes': continue
-			if not DEVELOPER == 'true' and strTest(name): continue
+			if not SHOWADULT == 'true' and adult.lower() == 'yes': hidden += 1; adultcount +=1; continue
+			if not DEVELOPER == 'true' and strTest(name): hidden += 1; continue
 			kodi = int(float(kodi))
 			total += 1
 			if kodi == 18: count18 += 1
 			elif kodi == 17: count17 += 1
 			elif kodi == 16: count16 += 1
 			elif kodi <= 15: count15 += 1
-	return total, count15, count16, count17, count18
+	return total, count15, count16, count17, count18, adultcount, hidden
 
 def strTest(string):
 	a = (string.lower()).split(' ')
@@ -784,6 +784,13 @@ def ebi(proc):
 
 def refresh():
 	ebi('Container.Refresh()')
+
+def splitNotify(notify):
+	link = openURL(notify).replace('\r','').replace('\t','').replace('\n', '[CR]')
+	if link.find('|||') == -1: return False, False
+	id, msg = link.split('|||')
+	if msg.startswith('[CR]'): msg = msg[4:]
+	return id.replace('[CR]', ''), msg
 
 def forceUpdate(silent=False):
 	ebi('UpdateAddonRepos()')
@@ -1259,7 +1266,7 @@ def backUpOptions(type, name=""):
 				name = getKeyboard("","Please enter a name for the %s zip" % type)
 				if not name: return False
 				name = name.replace('\\', '').replace('/', '').replace(':', '').replace('*', '').replace('?', '').replace('"', '').replace('<', '').replace('>', '').replace('|', '')
-			name = urllib.quote_plus(name); tempguizipname = ''
+			name = urllib.quote_plus(name); tempzipname = ''
 			zipname = os.path.join(mybuilds, '%s.zip' % name)
 			for_progress  = 0
 			ITEM          = []
